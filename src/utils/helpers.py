@@ -115,13 +115,13 @@ class QuizManager:
                 result_dict['options'] = []
                 result_dict["is_correct"] = user_ans.strip().lower() == q["correct_answer"].strip().lower()
 
-                self.results.append(result_dict)
+            self.results.append(result_dict)
 
 
     def generate_result_dataframe(self) -> pd.DataFrame:
 
         if not self.results:
-            return pd.DataFrame
+            return pd.DataFrame()
     
         return pd.DataFrame(self.results)
         
@@ -147,6 +147,7 @@ class QuizManager:
 
             df.to_csv(full_path, index = False)
             st.success("Results saved successfully.")
+            return full_path
 
         except Exception as e:
             st.error(f"Failed to save results : {e}")

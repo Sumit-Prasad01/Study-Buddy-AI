@@ -10,7 +10,7 @@ class MCQQuestion(BaseModel):
 
     correct_answer : str = Field(description = "The correct answer from the options")
 
-    @field_validator('question', pre = True)
+    @field_validator('question', mode='before')
     def clean_questions(cls, v):
         if isinstance(v, dict):
             return v.get('description', str(v))
@@ -23,7 +23,7 @@ class FillBlankQuestion(BaseModel):
 
     answer : str = Field(description = "The correct word or phrase for the blank")
 
-    @field_validator('question', pre = True)
+    @field_validator('question', mode='before')
     def clean_questions(cls, v):
         if isinstance(v, dict):
             return v.get('description', str(v))
